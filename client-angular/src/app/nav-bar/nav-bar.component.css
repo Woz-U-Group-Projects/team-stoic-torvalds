@@ -10,3 +10,7 @@ nav{
   width: 100vw;
   background-color: #D6EFFF;
 }
+
+h1{
+  border: 5px solid red;
+}
