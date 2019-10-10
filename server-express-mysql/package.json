@@ -12,8 +12,10 @@
     "express": "~4.16.0",
     "morgan": "~1.9.0",
     "mysql": "^2.17.1",
-    "mysql2": "^1.6.5",
-    "sequelize": "^5.19.5"
+    "mysql2": "^1.7.0",
+    "save": "^2.4.0",
+    "sequelize": "^4.44.3",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.3"
