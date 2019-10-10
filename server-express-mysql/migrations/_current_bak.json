@@ -8,15 +8,10 @@
                     "primaryKey": true,
                     "field": "idquestions",
                     "seqType": "Sequelize.INTEGER(11)"
-                },
-                "create": {
-                    "allowNull": false,
-                    "field": "create",
-                    "seqType": "Sequelize.STRING"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

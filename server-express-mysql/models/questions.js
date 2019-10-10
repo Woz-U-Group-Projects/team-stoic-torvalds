@@ -6,7 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
-    }
+    },
+create: {
+  type: DataTypes.STRING,
+  allowNull: false
+}
   }, {
     tableName: 'questions'
   });
