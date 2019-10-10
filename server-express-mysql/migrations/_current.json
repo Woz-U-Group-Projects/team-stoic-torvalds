@@ -1,0 +1,17 @@
+{
+    "tables": {
+        "questions": {
+            "tableName": "questions",
+            "schema": {
+                "idquestions": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "field": "idquestions",
+                    "seqType": "Sequelize.INTEGER(11)"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}
