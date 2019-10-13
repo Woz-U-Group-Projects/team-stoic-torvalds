@@ -1,0 +1,21 @@
+<h1>Ask your question!!!</h1>
+<form action="/question" method="POST">
+    <div>
+        <label for="question">Question: </label>
+        <input type="text" name="question">
+    </div>
+    <div>
+        <button type="submit">Ask?</button>
+    </div>
+<h1>Answers:</h1>
+    <div>
+        <input type="text" name="answer">
+    </div>
+    <div>
+        <button type="submit">Answer</button>
+    </div>
+</form>
+
+{{#each questions}}
+<h1>{{questions}}</h1>
+{{/each}}
