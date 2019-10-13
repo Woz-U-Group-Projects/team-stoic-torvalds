@@ -34,6 +34,22 @@ router.get('/questions/:idquestions', function(req, res, next) {
       });
     });
 });
+
+router.post('/questions', (req,res) => {
+  models.questions
+    findOrCreate({
+      where: {
+      idquestions:res.body.idquestions
+    }
+})
+.spread(function(results, created) {
+  if (created) {
+    res.redirect('actors');
+  } else {
+    res.send('This Question already exists!');
+    } 
+  });
+})
   
 
 
