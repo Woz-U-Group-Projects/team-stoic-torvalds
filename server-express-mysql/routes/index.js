@@ -20,6 +20,22 @@ router.get('/questions', function(req, res, next) {
   });
 });
 
+router.get('/questions/:idquestions', function(req, res, next) {
+  let questionId = parseInt(req.params.id);
+  models.question
+    .findOne({
+      where: {
+        question_idquestions: questionId
+      }
+    })
+    .then(question => {
+      res.render('specificActor', {
+        question: question
+      });
+    });
+});
+  
+
 
 connection.connect(function(err) {
   if (err) {
