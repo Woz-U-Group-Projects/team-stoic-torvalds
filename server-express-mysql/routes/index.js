@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const mysql = require('mysql');
 var mysql = require('mysql2');
+const models = require('../models');
 
 
 var connection = mysql.createConnection({
@@ -10,6 +11,15 @@ var connection = mysql.createConnection({
   password: 'Password!',
   database: 'GB'
 });
+
+router.get('/questions', function(req, res, next) {
+  models.question.findAll({}).then(questionsFound => {
+    res.render('questions', {
+      questions: questionsFound
+    });
+  });
+});
+
 
 connection.connect(function(err) {
   if (err) {
