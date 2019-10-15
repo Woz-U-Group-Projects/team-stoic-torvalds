@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var mysql = require('mysql2');
+var mysql = require('mysql');
 const models = require('../models');
 
 
@@ -22,7 +23,7 @@ router.get('/questions', function (req, res, next) {
       }]
     })
     .then(questionsFound => {
-      res.setHeader('cContent-Type', 'application/json');
+      res.setHeader('Content-Type', 'application/json');
       res.render(JSON.stringify(questionsFound));
     });
 });
@@ -43,58 +44,118 @@ router.get('/questions/:idquestions', function (req, res, next) {
     });
 });
 
+// Specfic ANSWER
+router.get('/answer/:idanswer', function (req, res, next) {
+  let answerId = parseInt(req.params.id);
+  models.answer
+    .findOne({
+      where: {
+        answer_idanswer: answerId
+      }
+    })
+    .then(answer => {
+      res.render('specificActor', {
+        answer: answer
+      });
+    });
+});
+
 // FIND OR CREATE A QUESTION
 router.post('/questions', (req, res) => {
   models.questions
   findOrCreate({
     where: {
-      create: res.body.create
+      questions: res.body.quesitons
     }
   })
-
-  // Association route
-  router.get('/questions', function (req, res, next) {
-    models.question
-      .findAll({ include: [{ model: models.answer }] })
-      .then(questionsFound => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(questionsFound));
-      });
-  });
-
-.spread(function (results, created) {
+  .spread(function (results, created) {
     if (created) {
-      res.redirect('actors');
+      res.redirect('question');
     } else {
       res.send('This Question already exists!');
     }
   });
-})
-
-// Provide Data to the front end
-router.get('questions', function (req, res, next) {
-  models.actors.finadAll({}).then(foundQuestions => {
-    const mappedQuestions = foundQuestions.map(actor => ({
-      QuestionID: question.question_questionid,
-      Question: `${question.create}`
-    }));
-    res.send(JSON.stringify(mappedQuestions));
-  });
-})
-
-
-
-connection.connect(function (err) {
-  if (err) {
-    console.error(err.message);
-    return;
-  }
-  console.log('Yay! You are connected to the database!');
-})
-
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
 });
 
-module.exports = router;
+  // FIND OR CREATE A ANSWER
+  router.post('/answer', (req, res) => {
+    models.answer
+    findOrCreate({
+      where: {
+        answer: res.body.answer
+      }
+    })
+    .spread(function (results, created) {
+      if (created) {
+        res.redirect('answer');
+      } else {
+        res.send('This Answer already exists!');
+      }
+    });
+  });
+
+    // Association route
+    router.get('/questions', function (req, res, next) {
+      models.question
+        .findAll({ include: [{ model: models.answer }] })
+        .then(questionsFound => {
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify(questionsFound));
+        });
+    });
+
+
+
+  // POST A QUESTION
+  router.post('/question', function (req, res, next) {
+    models.questions.create(req.body)
+      .then(newQuestion => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(newQuestion))
+      })
+      .caatch(err => {
+        res.status(400);
+        res.send(err.message);
+      });
+  });
+
+  // POST AN ANSWER
+  router.post('/answer', function (req, res, next) {
+    models.answer.create(req.body)
+      .then(newAnswer => {
+        res.setHeader('Content-Type', "application/json");
+        res.send(JSON.stringify(newAnswer));
+      })
+      .catch(err => {
+        res.status(400);
+        res.send(err.message);
+      });
+  });
+
+  // Provide Data to the front end
+  router.get('questions', function (req, res, next) {
+    models.actors.finadAll({}).then(foundQuestions => {
+      const mappedQuestions = foundQuestions.map(actor => ({
+        QuestionID: question.question_questionid,
+        Question: `${question.create}`
+      }));
+      res.send(JSON.stringify(mappedQuestions));
+    });
+  })
+
+
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log('Yay! You are connected to the database!');
+  })
+
+  /* GET home page. */
+  router.get("/", function (req, res, next) {
+    res.render("index", { title: "Express" });
+  });
+
+  module.exports = router;
