@@ -9,10 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CreateComponent } from './components/create/create.component';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ProjectDisplayComponent, NavBarComponent, CreateComponent],
+  declarations: [AppComponent, ProjectDisplayComponent, NavBarComponent, CreateComponent, DialogBoxComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule],
   providers: [],
   bootstrap: [AppComponent]
