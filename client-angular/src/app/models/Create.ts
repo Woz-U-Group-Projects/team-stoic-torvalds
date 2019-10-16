@@ -1,4 +1,5 @@
 export class Create {
-  title:'string';
+  id?:number;
+  title:string;
   completed:boolean;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Create } from '../../models/create';
+import { Create } from '../../models/Create';
 
 @Component({
   selector: 'app-create',
@@ -7,12 +7,19 @@ import { Create } from '../../models/create';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  create: string;
+  create: Create[];
 
   constructor() { }
 
   ngOnInit() {
+    this.create = [
+      {
+        id: 1,
+        title: 'null',
+        completed: true
 
+      }
+    ];
 
   }
 
