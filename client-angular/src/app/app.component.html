@@ -1,4 +1,12 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-root></app-root>
+<div style="text-align:center">
+  <h1>
+   {{ title }}!
+  </h1>
+  <div class="topnav">
+      <a class="active" href="http://localhost:4200/">Home</a>
+      <a href="http://localhost:4200/add-message"> Add Commets</a>
+      <a href="http://localhost:4200/list">Board Posts</a>
+      <a href="http://localhost:4200/edit-message">About</a>
+    </div>
 
-
+    <router-outlet></router-outlet>

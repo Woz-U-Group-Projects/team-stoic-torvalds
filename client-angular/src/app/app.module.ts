@@ -1,24 +1,34 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import 'core-js/proposals/reflect-metadata';
+import { ApiService } from './service/api.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {TokenInterceptor} from './core/interceptor';
 
-import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
-import { MessageComponent } from './message/message.component';
-import { MessageAddComponent } from './message-add/message-add.component';
-import { MessageEditComponent } from './message-edit/message-edit.component';
+
+import { LoginComponent } from './login/login.component';
+import { ListComponent } from './user/list/list.component';
+import { AddMessageComponent } from './user/add-message/add-message.component';
+import { EditMessageComponent } from './user/edit-message/edit-message.component';
+
+
 
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, DialogBoxComponent, MessageComponent, MessageAddComponent, MessageEditComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule],
-  providers: [],
+  declarations: [AppComponent, LoginComponent, ListComponent, AddMessageComponent, EditMessageComponent],
+
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, ReactiveFormsModule
+  ],
+  providers: [ApiService, {provide: HTTP_INTERCEPTORS,
+  useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
 
